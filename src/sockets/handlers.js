@@ -59,14 +59,11 @@ function handleDisconnect(io, socket) {
 function handleGetRooms(io, socket) {
 	const roomList = getRoomList();
 
-    console.log("Sending rooms list:", roomList);
 	socket.emit("rooms_list", roomList);
 }
 
 function registerSocketHandlers(io) {
 	io.on("connection", (socket) => {
-		console.log("User connected:", socket.id);
-
 		socket.on("join_room", (payload) => handleJoinRoom(io, socket, payload));
 		socket.on("typing", (payload) => handleTyping(socket, payload));
 		socket.on("stop_typing", (payload) => handleStopTyping(socket, payload));
